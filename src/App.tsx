@@ -6,6 +6,8 @@ import UserProfile from './components/UserProfile/UserProfile';
 import ProfileComparisonPage from './pages/ProfileComparisonPage/ProfileComparisonPage';
 import SimilarProfilesPage from './pages/SimilarProfilesPage/SimilarProfilesPage';
 import { useTheme } from './contexts/ThemeContext';
+import Home from './pages/Home/Home';
+import RepositoryDetails from './pages/RepositoryDetails/RepositoryDetails';
 
 const App: React.FC = () => {
   const { theme } = useTheme();
@@ -17,10 +19,13 @@ const App: React.FC = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<MainLayout />} />
-      <Route path="/profile/:userId" element={<UserProfile />} />
-      <Route path="/compare-profiles" element={<ProfileComparisonPage />} />
-      <Route path="/similar-profiles" element={<SimilarProfilesPage />} />
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/profile/:userId" element={<UserProfile />} />
+        <Route path="/repository/:repoId" element={<RepositoryDetails />} /> 
+        <Route path="/compare-profiles" element={<ProfileComparisonPage />} />
+        <Route path="/similar-profiles" element={<SimilarProfilesPage />} />
+      </Route>
     </Routes>
   );
 }
