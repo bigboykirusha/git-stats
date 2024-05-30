@@ -1,13 +1,18 @@
 import React from 'react';
-import './Header.module.scss';
+import { useTheme } from '../../contexts/ThemeContext';
+import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
+   const { theme, toggleTheme } = useTheme();
+
    return (
-      <header className="header">
-         <h1>Git Stats</h1>
-         {/* Добавьте другие элементы заголовка здесь */}
+      <header className={styles.header}>
+         <h1>GitHub Users</h1>
+         <button onClick={toggleTheme}>
+            {theme === 'light' ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
+         </button>
       </header>
    );
-}
+};
 
 export default Header;

@@ -3,27 +3,28 @@ import styles from './FilterPanel.module.scss';
 
 interface FilterPanelProps {
    onFilterChange: (filterType: string, value: string) => void;
+   filters: {
+      language: string;
+      country: string;
+   };
 }
 
-const FilterPanel: React.FC<FilterPanelProps> = ({ onFilterChange }) => {
-   const [country, setCountry] = useState(() => localStorage.getItem('country') || 'all');
-   const [language, setLanguage] = useState(() => localStorage.getItem('language') || 'all');
+const FilterPanel: React.FC<FilterPanelProps> = ({ onFilterChange, filters }) => {
+   const [country, setCountry] = useState(filters.country);
+   const [language, setLanguage] = useState(filters.language);
+   const [sort, setSort] = useState('followers');
 
    useEffect(() => {
-      const storedCountry = localStorage.getItem('country') || 'all';
-      if (country.toLowerCase() !== storedCountry.toLowerCase()) {
-         localStorage.setItem('country', country.toLowerCase());
-         onFilterChange('country', country.toLowerCase());
-      }
+      onFilterChange('country', country);
    }, [country, onFilterChange]);
 
    useEffect(() => {
-      const storedLanguage = localStorage.getItem('language') || 'all';
-      if (language !== storedLanguage) {
-         localStorage.setItem('language', language);
-         onFilterChange('language', language);
-      }
+      onFilterChange('language', language);
    }, [language, onFilterChange]);
+
+   useEffect(() => {
+      onFilterChange('sort', sort);
+   }, [sort, onFilterChange]);
 
    const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
       setCountry(e.target.value);
@@ -31,6 +32,10 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ onFilterChange }) => {
 
    const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
       setLanguage(e.target.value);
+   };
+
+   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setSort(e.target.value);
    };
 
    return (
@@ -53,6 +58,11 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ onFilterChange }) => {
             <option value="Java">Java</option>
             <option value="C++">C++</option>
             {/* Add more languages as needed */}
+         </select>
+         <select value={sort} onChange={handleSortChange}>
+            <option value="followers">Followers</option>
+            <option value="repositories">Repositories</option>
+            <option value="joined">Joined Date</option>
          </select>
       </div>
    );

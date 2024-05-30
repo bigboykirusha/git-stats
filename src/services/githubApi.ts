@@ -10,10 +10,10 @@ const axiosInstance = axios.create({
    },
 });
 
-export const fetchUsers = async (query: string) => {
+export const fetchUsers = async (query: string, sort: string, page: number) => {
    try {
       const response = await axiosInstance.get('/search/users', {
-         params: { q: query, per_page: 30 },
+         params: { q: query, sort: sort, order: 'desc', per_page: 30, page: page },
       });
       return response.data.items.map((item: any) => ({
          id: item.id,
@@ -30,7 +30,7 @@ export const fetchUsers = async (query: string) => {
 
 export const fetchUserDetails = async (username: string) => {
    try {
-      const response = await axios.get(`${GITHUB_API_BASE_URL}/users/${username}`);
+      const response = await axiosInstance.get(`${GITHUB_API_BASE_URL}/users/${username}`);
       return response.data; // возвращает все данные о пользователе
    } catch (error) {
       console.error('Error fetching user details from GitHub API:', error);
@@ -38,5 +38,12 @@ export const fetchUserDetails = async (username: string) => {
    }
 };
 
-
-
+export const fetchUserRepos = async (username: string) => {
+   try {
+      const response = await axiosInstance.get(`/users/${username}/repos`);
+      return response.data;
+   } catch (error) {
+      console.error('Error fetching user repositories from GitHub API:', error);
+      return [];
+   }
+};
