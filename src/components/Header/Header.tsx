@@ -1,16 +1,23 @@
+// Header.tsx
 import React from 'react';
-import { useTheme } from '../../contexts/ThemeContext';
-import styles from './Header.module.scss';
+import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
-   const { theme, toggleTheme } = useTheme();
-
    return (
-      <header className={styles.header}>
-         <h1>GitHub Users</h1>
-         <button onClick={toggleTheme}>
-            {theme === 'light' ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
-         </button>
+      <header>
+         <nav>
+            <ul>
+               <li>
+                  <Link to="/">Home</Link>
+               </li>
+               <li>
+                  <Link to="/compare-profiles">Compare Profiles</Link>
+               </li>
+               <li>
+                  <Link to="/similar-profiles">Similar Profiles</Link>
+               </li>
+            </ul>
+         </nav>
       </header>
    );
 };
