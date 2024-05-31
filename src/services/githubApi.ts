@@ -48,25 +48,6 @@ export const fetchUserRepos = async (username: string) => {
    }
 };
 
-export const fetchRepositoryDetailsByUrl = async (repositoryUrl: string) => {
-   try {
-      // Извлекаем имя пользователя и название репозитория из URL
-      const urlParts = repositoryUrl.split('/');
-      const username = urlParts[3];
-      const repositoryName = urlParts[4];
-
-      // Формируем полный путь к репозиторию
-      const repoPath = `/repos/${username}/${repositoryName}`;
-
-      // Получаем данные о репозитории
-      const response = await axiosInstance.get(repoPath);
-      return response.data;
-   } catch (error) {
-      console.error('Error fetching repository details from GitHub API:', error);
-      return null;
-   }
-};
-
 export const fetchRepositoryContributors = async (repoId: string) => {
    try {
       const response = await axiosInstance.get(`/repositories/${repoId}/contributors`);

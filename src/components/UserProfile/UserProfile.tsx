@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchUserDetails, fetchUserRepos } from '../../services/githubApi';
+import { fetchUserDetails, fetchUserRepos, fetchRepositoryContributors } from '../../services/githubApi';
 import { User, Repository } from '../../types';
 import styles from './UserProfile.module.scss';
 
@@ -9,6 +9,8 @@ const UserProfile: React.FC = () => {
    const [userDetails, setUserDetails] = useState<User | null>(null);
    const [popularRepos, setPopularRepos] = useState<Repository[]>([]);
    const [newestRepos, setNewestRepos] = useState<Repository[]>([]);
+   const [expandedRepoId, setExpandedRepoId] = useState<number | null>(null);
+   const [contributors, setContributors] = useState<{ [key: number]: string[] }>({});
 
    useEffect(() => {
       const fetchUser = async () => {
@@ -37,6 +39,19 @@ const UserProfile: React.FC = () => {
       fetchRepos();
    }, [userId]);
 
+   const toggleRepoDetails = async (repoId: number) => {
+      if (expandedRepoId === repoId) {
+         setExpandedRepoId(null);
+         return;
+      }
+
+      setExpandedRepoId(repoId);
+      if (!contributors[repoId]) {
+         const repoContributors = await fetchRepositoryContributors(repoId.toString());
+         setContributors(prev => ({ ...prev, [repoId]: repoContributors.map((contributor: any) => contributor.login) }));
+      }
+   };
+
    if (!userDetails) {
       return <div>Loading...</div>;
    }
@@ -58,11 +73,24 @@ const UserProfile: React.FC = () => {
                <h3>Most Popular Repositories</h3>
                <ul>
                   {popularRepos.map(repo => (
-                     <li key={repo.id}>
-                        <a href={repo.html_url} target="_blank" rel="noopener noreferrer">{repo.name}</a>
-                        <p>{repo.description}</p>
-                        <p>Stars: {repo.stargazers_count}</p>
-                        <p>Forks: {repo.forks_count}</p>
+                     <li key={repo.id} onClick={() => toggleRepoDetails(repo.id)}>
+                        <div>
+                           <a href={repo.html_url} target="_blank" rel="noopener noreferrer">{repo.name}</a>
+                           <p>Stars: {repo.stargazers_count}</p>
+                        </div>
+                        {expandedRepoId === repo.id && (
+                           <div className={styles.repoDetails}>
+                              <p>Description: {repo.description}</p>
+                              <p>Forks: {repo.forks_count}</p>
+                              <p>Created at: {new Date(repo.created_at).toLocaleDateString()}</p>
+                              <h4>Contributors:</h4>
+                              <ul>
+                                 {contributors[repo.id]?.map(contributor => (
+                                    <li key={contributor}>{contributor}</li>
+                                 ))}
+                              </ul>
+                           </div>
+                        )}
                      </li>
                   ))}
                </ul>
@@ -71,12 +99,24 @@ const UserProfile: React.FC = () => {
                <h3>Newest Repositories</h3>
                <ul>
                   {newestRepos.map(repo => (
-                     <li key={repo.id}>
-                        <a href={repo.html_url} target="_blank" rel="noopener noreferrer">{repo.name}</a>
-                        <p>{repo.description}</p>
-                        <p>Created at: {new Date(repo.created_at).toLocaleDateString()}</p>
-                        <p>Stars: {repo.stargazers_count}</p>
-                        <p>Forks: {repo.forks_count}</p>
+                     <li key={repo.id} onClick={() => toggleRepoDetails(repo.id)}>
+                        <div>
+                           <a href={repo.html_url} target="_blank" rel="noopener noreferrer">{repo.name}</a>
+                           <p>Stars: {repo.stargazers_count}</p>
+                        </div>
+                        {expandedRepoId === repo.id && (
+                           <div className={styles.repoDetails}>
+                              <p>Description: {repo.description}</p>
+                              <p>Forks: {repo.forks_count}</p>
+                              <p>Created at: {new Date(repo.created_at).toLocaleDateString()}</p>
+                              <h4>Contributors:</h4>
+                              <ul>
+                                 {contributors[repo.id]?.map(contributor => (
+                                    <li key={contributor}>{contributor}</li>
+                                 ))}
+                              </ul>
+                           </div>
+                        )}
                      </li>
                   ))}
                </ul>

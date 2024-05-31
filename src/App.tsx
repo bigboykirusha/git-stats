@@ -7,7 +7,6 @@ import ProfileComparisonPage from './pages/ProfileComparisonPage/ProfileComparis
 import SimilarProfilesPage from './pages/SimilarProfilesPage/SimilarProfilesPage';
 import { useTheme } from './contexts/ThemeContext';
 import Home from './pages/Home/Home';
-import RepositoryDetails from './pages/RepositoryDetails/RepositoryDetails';
 
 const App: React.FC = () => {
   const { theme } = useTheme();
@@ -22,7 +21,6 @@ const App: React.FC = () => {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
         <Route path="/profile/:userId" element={<UserProfile />} />
-        <Route path="/repository/:repoId" element={<RepositoryDetails />} /> 
         <Route path="/compare-profiles" element={<ProfileComparisonPage />} />
         <Route path="/similar-profiles" element={<SimilarProfilesPage />} />
       </Route>

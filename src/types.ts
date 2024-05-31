@@ -27,9 +27,3 @@ export interface Contributor {
   id: number;
   contributions: number;
 }
-
-export interface CodeMetrics {
-  comments: number;
-  complexity: number;
-  // Добавьте другие метрики по мере необходимости
-}

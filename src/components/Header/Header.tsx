@@ -20,9 +20,6 @@ const Header: React.FC = () => {
                <li>
                   <Link to="/similar-profiles">Similar Profiles</Link>
                </li>
-               <li>
-                  <Link to="/repository/:repoId">Repository</Link>
-               </li>
             </ul>
             <button className={styles.themeToggle} onClick={toggleTheme}>
                Switch to {theme === 'light' ? 'dark' : 'light'} mode
