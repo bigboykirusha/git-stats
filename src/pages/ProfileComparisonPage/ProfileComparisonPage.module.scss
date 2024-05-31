@@ -1,0 +1,36 @@
+.comparisonPage {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
+ 
+ .profiles {
+   display: flex;
+   justify-content: space-around;
+   width: 100%;
+ }
+ 
+ .comparisonResults {
+   margin-top: 20px;
+   text-align: center;
+ }
+ 
+ .comparisonItem {
+   display: flex;
+   justify-content: space-around;
+   margin-bottom: 10px;
+ }
+ 
+ .comparisonField {
+   padding: 10px;
+   border: 1px solid #ddd;
+   width: 45%;
+ }
+ 
+ .winner {
+   background-color: #d4edda;
+ }
+ 
+ .loser {
+   background-color: #f8d7da;
+ } 
