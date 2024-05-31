@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../types';
-import './ProfileCard.scss';
+import './ProfileCard.module.scss';
 
 interface ProfileCardProps {
    user: User | null;
