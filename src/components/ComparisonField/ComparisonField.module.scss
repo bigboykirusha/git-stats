@@ -1,0 +1,22 @@
+// src/components/ComparisonField/ComparisonField.module.scss
+.comparisonItem {
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 10px;
+ }
+ 
+ .comparisonField {
+   width: 45%;
+   padding: 10px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+ }
+ 
+ .winner {
+   background-color: #d4edda;
+ }
+ 
+ .loser {
+   background-color: #f8d7da;
+ }
+ 

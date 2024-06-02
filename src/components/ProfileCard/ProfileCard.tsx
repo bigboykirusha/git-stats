@@ -1,38 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from './ProfileCard.module.scss';
 import { User } from '../../types';
-import './ProfileCard.module.scss';
 
 interface ProfileCardProps {
    user: User | null;
    onUserSelect: (url: string) => void;
    onClear: () => void;
+   className?: string;
+   url: string;
 }
 
-const ProfileCard: React.FC<ProfileCardProps> = ({ user, onUserSelect, onClear }) => {
-   const [inputVisible, setInputVisible] = useState(false);
-   const [url, setUrl] = useState('');
+const ProfileCard: React.FC<ProfileCardProps> = ({ user, onUserSelect, onClear, className, url }) => {
+   const [inputValue, setInputValue] = useState(url);
    const navigate = useNavigate();
 
-   const handleButtonClick = () => {
-      setInputVisible(true);
-   };
+   useEffect(() => {
+      setInputValue(url);
+   }, [url]);
 
    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setUrl(e.target.value);
+      setInputValue(e.target.value);
    };
 
-   const handleSubmit = () => {
-      onUserSelect(url);
-      setInputVisible(false);
-   };
-
-   const handleClose = () => {
-      setInputVisible(false);
-   };
-
-   const handleClear = () => {
-      onClear();
+   const handleButtonClick = () => {
+      onUserSelect(inputValue);
    };
 
    const handleAvatarClick = () => {
@@ -42,44 +34,28 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user, onUserSelect, onClear }
    };
 
    return (
-      <div className="profile-card">
+      <div className={`${styles.profileCard} ${className}`}>
          {user ? (
             <div>
-               <div className="profile-header">
-                  <img
-                     src={user.avatar_url}
-                     alt={user.login}
-                     width="100"
-                     className="profile-avatar"
-                     onClick={handleAvatarClick}
-                  />
-                  <button className="clear-btn" onClick={handleClear}>×</button>
-               </div>
+               <img src={user.avatar_url} alt={user.login} onClick={handleAvatarClick} />
                <h3>{user.login}</h3>
-               <p>{user.name}</p>
-               <p>{user.company}</p>
-               <p>{user.location}</p>
-               <p>Followers: {user.followers}</p>
-               <p>Following: {user.following}</p>
-               <p>Repositories: {user.public_repos}</p>
+               <p>{user.bio}</p>
+               {user.twitter_username && (
+                  <a href={`https://twitter.com/${user.twitter_username}`} target="_blank" rel="noopener noreferrer">
+                     Twitter
+                  </a>
+               )}
+               {user.blog && (
+                  <a href={user.blog} target="_blank" rel="noopener noreferrer">
+                     Blog
+                  </a>
+               )}
+               <button onClick={onClear}>Clear</button>
             </div>
          ) : (
             <div>
-               <button onClick={handleButtonClick}>Select Profile</button>
-               {inputVisible && (
-                  <div className="popup">
-                     <div className="popup-inner">
-                        <button className="close-btn" onClick={handleClose}>×</button>
-                        <input
-                           type="text"
-                           value={url}
-                           onChange={handleInputChange}
-                           placeholder="Enter GitHub profile URL"
-                        />
-                        <button onClick={handleSubmit}>Submit</button>
-                     </div>
-                  </div>
-               )}
+               <input type="text" value={inputValue} onChange={handleInputChange} placeholder="Enter GitHub URL" />
+               <button onClick={handleButtonClick}>Load</button>
             </div>
          )}
       </div>

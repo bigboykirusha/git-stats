@@ -13,9 +13,9 @@ if (rootElem) {
   const root = createRoot(rootElem);
   root.render(
     <ThemeProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
     </ThemeProvider>
   );
 }

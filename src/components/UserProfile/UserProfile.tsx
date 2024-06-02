@@ -72,8 +72,8 @@ const UserProfile: React.FC = () => {
             <div>
                <h3>Most Popular Repositories</h3>
                <ul>
-                  {popularRepos.map(repo => (
-                     <li key={repo.id} onClick={() => toggleRepoDetails(repo.id)}>
+                  {popularRepos.map((repo, index) => (
+                     <li key={repo.id - index} onClick={() => toggleRepoDetails(repo.id)}>
                         <div>
                            <a href={repo.html_url} target="_blank" rel="noopener noreferrer">{repo.name}</a>
                            <p>Stars: {repo.stargazers_count}</p>
@@ -98,8 +98,8 @@ const UserProfile: React.FC = () => {
             <div>
                <h3>Newest Repositories</h3>
                <ul>
-                  {newestRepos.map(repo => (
-                     <li key={repo.id} onClick={() => toggleRepoDetails(repo.id)}>
+                  {newestRepos.map((repo, index) => (
+                     <li key={repo.id - index} onClick={() => toggleRepoDetails(repo.id)}>
                         <div>
                            <a href={repo.html_url} target="_blank" rel="noopener noreferrer">{repo.name}</a>
                            <p>Stars: {repo.stargazers_count}</p>
