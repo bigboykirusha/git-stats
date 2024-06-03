@@ -9,9 +9,10 @@ interface ProfileCardProps {
    onClear: () => void;
    className?: string;
    url: string;
+   isMainUser?: boolean; // Новый пропс для различия основного пользователя
 }
 
-const ProfileCard: React.FC<ProfileCardProps> = ({ user, onUserSelect, onClear, className, url }) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({ user, onUserSelect, onClear, className, url, isMainUser }) => {
    const [inputValue, setInputValue] = useState(url);
    const navigate = useNavigate();
 
@@ -47,10 +48,10 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user, onUserSelect, onClear, 
                )}
                {user.blog && (
                   <a href={user.blog} target="_blank" rel="noopener noreferrer">
-                     Blog
+                     LinkedIn
                   </a>
                )}
-               <button onClick={onClear}>Clear</button>
+               {isMainUser && <button onClick={onClear}>Clear</button>}
             </div>
          ) : (
             <div>

@@ -1,22 +1,32 @@
-// src/components/ComparisonField/ComparisonField.module.scss
 .comparisonItem {
-   display: flex;
-   justify-content: space-between;
-   margin-bottom: 10px;
- }
- 
- .comparisonField {
-   width: 45%;
-   padding: 10px;
-   border: 1px solid #ccc;
-   border-radius: 4px;
- }
- 
- .winner {
-   background-color: #d4edda;
- }
- 
- .loser {
-   background-color: #f8d7da;
- }
- 
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.comparisonField {
+  width: 45%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease;
+}
+
+.winner {
+  background-color: #d4edda;
+  border-color: #28a745;
+}
+
+.loser {
+  background-color: #f8d7da;
+  border-color: #dc3545;
+}
+
+span {
+  font-weight: bold;
+}

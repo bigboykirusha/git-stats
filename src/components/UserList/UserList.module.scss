@@ -1,6 +1,52 @@
 .userList {
-   display: flex;
-   flex-wrap: wrap;
-   gap: 10px;
- }
- 
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.userCard {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  width: 200px;
+  padding: 20px;
+}
+
+.userCard img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.userCard h3 {
+  margin: 10px 0;
+  font-size: 1.5rem;
+}
+
+.userCard p {
+  color: #666;
+  font-size: 1rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}

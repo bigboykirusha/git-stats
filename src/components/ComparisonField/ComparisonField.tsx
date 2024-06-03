@@ -1,4 +1,3 @@
-// src/components/ComparisonField/ComparisonField.tsx
 import React from 'react';
 import styles from './ComparisonField.module.scss';
 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProfileCard from '../../components/ProfileCard/ProfileCard';
 import { User, ComparisonResult } from '../../types';
-
 import styles from './ProfileComparisonPage.module.scss';
 import { compareUsers } from '../../Utils/comparisonUtils';
 import { handleClearUser, handleUserSelect } from '../../Utils/profileUtils';
@@ -37,6 +36,7 @@ const ProfileComparisonPage: React.FC = () => {
                onClear={() => handleClearUser(setUser1, setUrl1, setShowResults, setComparisonResult)}
                className={getCardClass('user1')}
                url={url1}
+               isMainUser={true} // Добавляем этот пропс для основного пользователя
             />
             <ProfileCard
                user={user2}

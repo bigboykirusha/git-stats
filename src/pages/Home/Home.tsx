@@ -1,9 +1,9 @@
-// Home.tsx
 import React, { useState, useEffect, useCallback } from 'react';
 import FilterPanel from '../../components/FilterPanel/FilterPanel';
 import UserList from '../../components/UserList/UserList';
 import { fetchUsers } from '../../services/githubApi';
 import { User } from '../../types';
+import styles from "./Home.module.scss"
 
 const Home: React.FC = () => {
    const [users, setUsers] = useState<User[]>([]);
@@ -11,19 +11,15 @@ const Home: React.FC = () => {
       language: localStorage.getItem('language') || 'all',
       country: localStorage.getItem('country') || 'all',
       sort: 'followers',
-      city: '', // добавить, если нужно
+      city: '',
    });
    const [page, setPage] = useState(1);
 
    const handleFilterChange = useCallback((filterType: string, value: string) => {
       setFilters((prevFilters) => ({ ...prevFilters, [filterType]: value }));
       localStorage.setItem(filterType, value);
-      setPage(1); // сброс страницы при изменении фильтров
+      setPage(1);
    }, []);
-
-   const handlePageChange = (newPage: number) => {
-      setPage(newPage);
-   };
 
    useEffect(() => {
       const fetchFilteredUsers = async () => {
@@ -49,9 +45,11 @@ const Home: React.FC = () => {
    }, [filters, page]);
 
    return (
-      <div>
+      <div className={styles.home}>
          <FilterPanel onFilterChange={handleFilterChange} filters={filters} />
-         <UserList users={users} onPageChange={handlePageChange} currentPage={page} />
+         <div className={styles.userList}> 
+            <UserList users={users} onPageChange={setPage} currentPage={page} />
+         </div>
       </div>
    );
 };

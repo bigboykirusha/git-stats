@@ -1,0 +1,34 @@
+.header {
+   background-color: #282c34; /* Цвет фона */
+   color: white; /* Цвет текста */
+   padding: 20px; /* Отступы внутри заголовка */
+}
+
+.nav {
+   display: flex; /* Отображение элементов навигации в строку */
+   justify-content: space-between; /* Равномерное распределение пространства между элементами */
+   align-items: center; /* Выравнивание элементов по вертикали по центру */
+}
+
+.navList {
+   list-style-type: none; /* Удаление маркера списка */
+   padding: 0; /* Удаление внутренних отступов списка */
+   margin: 0; /* Удаление внешних отступов списка */
+}
+
+.navList li {
+   display: inline; /* Отображение элементов списка в строку */
+   margin-right: 20px; /* Отступ между элементами списка */
+}
+
+.navList li:last-child {
+   margin-right: 0; /* Убираем отступ у последнего элемента списка */
+}
+
+.themeToggle {
+   background-color: transparent; /* Прозрачный фон */
+   border: none; /* Удаление границы */
+   color: white; /* Цвет текста */
+   cursor: pointer; /* Изменение курсора при наведении */
+   font-size: 16px; /* Размер шрифта */
+}

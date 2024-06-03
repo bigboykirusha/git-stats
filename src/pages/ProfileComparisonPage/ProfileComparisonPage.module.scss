@@ -2,17 +2,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+  min-height: 100vh;
 }
 
 .profiles {
   display: flex;
   justify-content: space-around;
   width: 100%;
+  max-width: 1200px;
+  margin-bottom: 20px;
 }
 
 .comparisonResults {
   margin-top: 20px;
   text-align: center;
+  width: 100%;
+  max-width: 800px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .comparisonItem {
@@ -25,22 +35,31 @@
   padding: 10px;
   border: 1px solid #ddd;
   width: 45%;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease;
 }
 
 .winner {
   background-color: #d4edda;
+  border-color: #28a745;
 }
 
 .loser {
   background-color: #f8d7da;
+  border-color: #dc3545;
 }
 
 .winnerCard {
   border: 2px solid #28a745;
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+  transition: box-shadow 0.3s ease;
 }
 
 .loserCard {
   border: 2px solid #dc3545;
+  box-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
+  transition: box-shadow 0.3s ease;
 }
 
 .compareButton {
@@ -48,4 +67,14 @@
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
 }

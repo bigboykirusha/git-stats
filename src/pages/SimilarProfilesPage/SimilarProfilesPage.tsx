@@ -11,7 +11,7 @@ const SimilarProfilesPage: React.FC = () => {
    const [similarProfiles, setSimilarProfiles] = useState<User[]>([]);
    const [loading, setLoading] = useState(false);
    const [error, setError] = useState<string | null>(null);
-   const [currentPage, setCurrentPage] = useState(1); // Текущая страница
+   const [currentPage, setCurrentPage] = useState(1);
    const [allUsersLoaded, setAllUsersLoaded] = useState<boolean>(false);
 
    useEffect(() => {
@@ -37,7 +37,7 @@ const SimilarProfilesPage: React.FC = () => {
             const userDetails = await fetchUserDetails(username);
             setUser(userDetails);
             setSimilarProfiles([]);
-            setCurrentPage(1); // Сброс текущей страницы при новом поиске
+            setCurrentPage(1);
          }
       } catch (err) {
          setError('Ошибка при загрузке похожих профилей. Пожалуйста, попробуйте снова.');
@@ -90,6 +90,7 @@ const SimilarProfilesPage: React.FC = () => {
                onUserSelect={handleUserSelect}
                onClear={handleClear}
                url={url}
+               isMainUser={true} // Передаем новый пропс для основного пользователя
             />
          </div>
          {loading && <p>Loading...</p>}
@@ -103,9 +104,14 @@ const SimilarProfilesPage: React.FC = () => {
                      onUserSelect={() => { }}
                      onClear={() => { }}
                      url=""
+                     isMainUser={true} // Похожие профили не должны иметь кнопку "Clear"
                   />
                ))}
-               <button onClick={handleLoadMore} disabled={allUsersLoaded}>
+               <button
+                  onClick={handleLoadMore}
+                  disabled={allUsersLoaded}
+                  className={styles.loadMoreButton}
+               >
                   {allUsersLoaded ? 'Остальное за донат' : 'Загрузить еще'}
                </button>
             </div>

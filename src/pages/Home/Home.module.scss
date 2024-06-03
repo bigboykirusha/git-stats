@@ -1,0 +1,10 @@
+.home {
+   padding: 20px;
+}
+
+.userList {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr); /* Три колонки с равным размером */
+   gap: 20px; /* Расстояние между карточками */
+   justify-content: center; /* Выравнивание по центру */
+}
