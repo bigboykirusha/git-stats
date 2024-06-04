@@ -41,14 +41,24 @@ export const fetchUsers = async (query: string, sort: string, page: number) => {
       const response = await axiosInstance.get('/search/users', {
          params: { q: query, sort: sort, order: 'desc', per_page: 10, page: page },
       });
-      return response.data.items.map((item: any) => ({
-         id: item.id,
-         login: item.login,
-         avatar_url: item.avatar_url,
-         repositories: item.public_repos,
-         followers: item.followers,
-         updated_at: item.updated_at
+
+      const users = await Promise.all(response.data.items.map(async (item: any) => {
+         const userDetails = await fetchUserDetails(item.login);
+
+         return {
+            id: item.id,
+            login: item.login,
+            avatar_url: item.avatar_url,
+            public_repos: userDetails.public_repos,
+            followers: userDetails.followers,
+            bio: userDetails.bio,
+            twitter_username: userDetails.twitter_username,
+            blog: userDetails.blog,
+            updated_at: item.updated_at,
+         };
       }));
+
+      return users; 
    } catch (error) {
       console.error('Ошибка при получении пользователей с GitHub API:', error);
       return [];

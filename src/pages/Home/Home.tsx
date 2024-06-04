@@ -47,9 +47,7 @@ const Home: React.FC = () => {
    return (
       <div className={styles.home}>
          <FilterPanel onFilterChange={handleFilterChange} filters={filters} />
-         <div className={styles.userList}> 
-            <UserList users={users} onPageChange={setPage} currentPage={page} />
-         </div>
+         <UserList users={users} onPageChange={setPage} currentPage={page} />
       </div>
    );
 };

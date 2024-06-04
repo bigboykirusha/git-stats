@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
   min-height: 100vh;
 }
 
@@ -10,8 +9,14 @@
   display: flex;
   justify-content: space-around;
   width: 100%;
+  gap: 20px;
   max-width: 1200px;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .comparisonResults {
@@ -23,6 +28,14 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    margin-bottom: 20px;
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+  }
 }
 
 .comparisonItem {
@@ -38,6 +51,7 @@
   border-radius: 4px;
   background-color: #f9f9f9;
   transition: background-color 0.3s ease;
+  
 }
 
 .winner {
@@ -63,7 +77,6 @@
 }
 
 .compareButton {
-  margin-top: 20px;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;

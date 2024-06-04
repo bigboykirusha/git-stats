@@ -1,52 +1,67 @@
-.userList {
+.userListContainer {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.userCard {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  text-align: center;
-  width: 200px;
-  padding: 20px;
-}
-
-.userCard img {
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Расстояние между карточками */
   width: 100%;
-  height: auto;
-  border-radius: 50%;
-}
-
-.userCard h3 {
-  margin: 10px 0;
-  font-size: 1.5rem;
-}
-
-.userCard p {
-  color: #666;
-  font-size: 1rem;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
   margin-top: 20px;
 }
 
-.pagination button {
+.userList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Две колонки на широких экранах */
+  gap: 20px; /* Расстояние между карточками */
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr; /* Одна колонка на мобильных устройствах */
+    gap: 15px; /* Уменьшаем расстояние между карточками на мобильных устройствах */
+  }
+}
+
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background-color: #fff; /* Белый фон */
+  border-top: 1px solid #ccc; /* Верхняя граница */
+  z-index: 10; /* Положение поверх других элементов */
+}
+
+.paginationButton {
   background-color: #007bff;
   color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 50%;
   cursor: pointer;
   margin: 0 5px;
+  transition: background-color 0.3s ease-in-out;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  &:disabled {
+    background-color: #999; /* Цвет кнопки в неактивном состоянии */
+    cursor: not-allowed;
+  }
 }
 
-.pagination button:hover {
-  background-color: #0056b3;
+.pageNumber {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  margin: 0 10px;
+  color: #333;
+  font-weight: 400;
 }

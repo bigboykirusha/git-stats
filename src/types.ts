@@ -11,7 +11,7 @@ export interface User {
   public_repos: number;
   stars: number;
   language: string;
-  bio?: string; // Свойства могут быть необязательными
+  bio?: string;
   twitter_username?: string;
   blog?: string;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import ProfileCard from '../ProfileCard/ProfileCard';
 import styles from './UserList.module.scss';
 import { User } from '../../types';
 
@@ -10,23 +10,38 @@ interface UserListProps {
 }
 
 const UserList: React.FC<UserListProps> = ({ users, onPageChange, currentPage }) => {
+   const handlePageChange = (page: number) => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      onPageChange(page);
+   };
+
    return (
-      <div>
+      <div className={styles.userListContainer}>
          <div className={styles.userList}>
             {users.map(user => (
-               <Link key={user.id} to={`/profile/${user.login}`} className={styles.userCard}>
-                  <img src={user.avatar_url} alt={user.login} />
-                  <h3>{user.login}</h3>
-               </Link>
+               <ProfileCard
+                  key={user.id}
+                  user={user}
+                  onUserSelect={() => { }}
+                  onClear={() => { }}
+                  url={user.html_url}
+               />
             ))}
          </div>
-         <div className={styles.pagination}>
-            <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
-               Previous
+         <div className={styles.paginationContainer}>
+            <button
+               className={styles.paginationButton}
+               onClick={() => handlePageChange(currentPage - 1)}
+               disabled={currentPage === 1}
+            >
+               {'<'}
             </button>
-            <span>Page {currentPage}</span>
-            <button onClick={() => onPageChange(currentPage + 1)}>
-               Next
+            <span className={styles.pageNumber}>Page {currentPage}</span>
+            <button
+               className={styles.paginationButton}
+               onClick={() => handlePageChange(currentPage + 1)}
+            >
+               {'>'}
             </button>
          </div>
       </div>

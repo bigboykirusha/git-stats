@@ -36,7 +36,7 @@ const ProfileComparisonPage: React.FC = () => {
                onClear={() => handleClearUser(setUser1, setUrl1, setShowResults, setComparisonResult)}
                className={getCardClass('user1')}
                url={url1}
-               isMainUser={true} // Добавляем этот пропс для основного пользователя
+               isMainUser={true}
             />
             <ProfileCard
                user={user2}
@@ -44,6 +44,7 @@ const ProfileComparisonPage: React.FC = () => {
                onClear={() => handleClearUser(setUser2, setUrl2, setShowResults, setComparisonResult)}
                className={getCardClass('user2')}
                url={url2}
+               isMainUser={true}
             />
          </div>
          {user1 && user2 && (

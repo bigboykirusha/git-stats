@@ -19,7 +19,7 @@ const ComparisonField: React.FC<ComparisonFieldProps> = ({ label, value1, value2
    return (
       <div className={styles.comparisonItem}>
          <div className={`${styles.comparisonField} ${getFieldClass(value1, value2)}`}>
-            <span>{label}:</span> {value1}
+            <span>{label}:</span> {value1} 
          </div>
          <div className={`${styles.comparisonField} ${getFieldClass(value2, value1)}`}>
             <span>{label}:</span> {value2}

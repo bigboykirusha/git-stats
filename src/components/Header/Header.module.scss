@@ -1,34 +1,142 @@
 .header {
-   background-color: #282c34; /* Цвет фона */
-   color: white; /* Цвет текста */
-   padding: 20px; /* Отступы внутри заголовка */
+   background-color: #282c34;
+   color: white;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 20px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   position: relative;
+   width: 100%;
+   top: 0;
+   z-index: 1001; /* Ensure header stays above the menu */
+
+   @media (max-width: 768px) {
+      
+      
+   }
 }
 
-.nav {
-   display: flex; /* Отображение элементов навигации в строку */
-   justify-content: space-between; /* Равномерное распределение пространства между элементами */
-   align-items: center; /* Выравнивание элементов по вертикали по центру */
+.header__logo h1 {
+   position: relative;
+   font-size: 1.5rem;
+   font-weight: normal;
+   color: white;
+   z-index: 10000;
 }
 
-.navList {
-   list-style-type: none; /* Удаление маркера списка */
-   padding: 0; /* Удаление внутренних отступов списка */
-   margin: 0; /* Удаление внешних отступов списка */
+.header__navbar {
+   display: flex;
+   align-items: center;
 }
 
-.navList li {
-   display: inline; /* Отображение элементов списка в строку */
-   margin-right: 20px; /* Отступ между элементами списка */
+.header__button {
+   color: white;
+   text-decoration: none;
+   margin-right: 20px;
+   transition: color 0.3s;
 }
 
-.navList li:last-child {
-   margin-right: 0; /* Убираем отступ у последнего элемента списка */
+.header__button:hover {
+   color: #61dafb;
+}
+
+.burgerMenu {
+   display: none;
+   cursor: pointer;
+   flex-direction: column;
+   justify-content: space-around;
+   height: 30px; /* изменяем высоту меню бургера */
+   width: 30px;
+   z-index: 1002; /* Ensure it stays above the menu */
+}
+
+.burgerBar {
+   width: 100%;
+   height: 3px;
+   background-color: white;
+   transition: all 0.3s;
+}
+
+.burgerMenu.active .bar1 {
+   transform: rotate(-45deg) translate(-5px, 9px);
+}
+
+.burgerMenu.active .bar2 {
+   opacity: 0;
+}
+
+.burgerMenu.active .bar3 {
+   transform: rotate(45deg) translate(-5px, -9px);
+}
+
+.fullscreenMenu {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100vh;
+   background-color: #282c34;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 1000; /* Ensure the menu is below the header */
+   overflow: hidden;
+}
+
+.fullscreenMenu__content {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.fullscreenMenu__link {
+   color: white;
+   text-decoration: none;
+   font-size: 1.5rem;
+   margin: 20px 0;
+   transition: color 0.3s; /* добавляем transition для цвета */
+}
+
+.fullscreenMenu__link:hover {
+   color: #61dafb;
 }
 
 .themeToggle {
-   background-color: transparent; /* Прозрачный фон */
-   border: none; /* Удаление границы */
-   color: white; /* Цвет текста */
-   cursor: pointer; /* Изменение курсора при наведении */
-   font-size: 16px; /* Размер шрифта */
+   position: relative;
+   z-index: 10000;
+   background-color: white;
+   border: 2px solid white;
+   color: white;
+   cursor: pointer;
+   font-size: 20px; /* увеличиваем размер смайлика */
+   margin: 0 20px;
+   border-radius: 50%;
+   width: 30px; /* изменяем размер переключателя темы */
+   height: 30px; /* изменяем размер переключателя темы */
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   transition: background-color 0.3s, color 0.3s;
+   line-height: 0%;
+}
+
+.themeToggle:hover {
+   background-color: white;
+}
+
+.buttons {
+   display: flex;
+   align-items: center;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+   .header__navbar {
+      display: none;
+   }
+
+   .burgerMenu {
+      display: flex;
+   }
 }

@@ -1,44 +1,123 @@
 .profileCard {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 5px;
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  width: 100%;
 
   &:hover {
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
   }
 
+  .profileContent {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
   img {
-    width: 100px; /* Фиксированная ширина изображения */
-    height: 100px; /* Фиксированная высота изображения */
-    border-radius: 50%; /* Скругленные углы для круглого изображения */
-    margin-bottom: 10px;
+    width: 120px;
+    height: 120px;
+    margin-bottom: auto;
+    border-radius: 50%;
+    margin-right: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
   }
 
-  h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-align: left;
 
-  p {
-    font-size: 14px;
-    text-align: center;
-    margin-bottom: 10px;
-  }
+    h3 {
+      font-size: 22px;
+      margin-bottom: 5px;
+      color: #61dafb;
 
-  a {
-    color: #007bff;
-    text-decoration: none;
-    font-size: 14px;
-    margin-bottom: 10px;
+      @media (max-width: 768px) {
+        font-size: 18px;
+      }
+    }
 
-    &:hover {
-      text-decoration: underline;
+    .userName {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    .userLocation {
+      font-size: 16px;
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    .bio {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 10px;
+
+      @media (max-width: 768px) {
+        font-size: 12px;
+      }
+    }
+
+    .userStats {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #333;
+
+      span {
+        margin-right: 15px;
+        white-space: nowrap;
+
+        @media (max-width: 768px) {
+          font-size: 12px;
+        }
+      }
+    }
+
+    .links {
+      display: flex;
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-right: 15px;
+        color: #007bff;
+        text-decoration: none;
+        font-size: 14px;
+        line-height: 100%;
+
+        @media (max-width: 768px) {
+          font-size: 12px;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .icon {
+        height: 18px;
+        width: 18px;
+        margin-right: 5px;
+
+        @media (max-width: 768px) {
+          height: 16px;
+          width: 16px;
+        }
+      }
     }
   }
 
@@ -55,5 +134,50 @@
       background-color: #0056b3;
       transform: scale(1.05);
     }
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    padding: 15px;
+
+    img {
+      width: 100px;
+      height: 100px;
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+  }
+}
+
+.clearButton {
+  position: absolute;
+  top: 10px; /* Отступ сверху */
+  right: 10px; /* Отступ справа */
+  background-color: #0056b3;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  font-size: 12px;
+
+  &:hover {
+    background-color: #0a519c;
   }
 }

@@ -93,6 +93,7 @@ const SimilarProfilesPage: React.FC = () => {
                isMainUser={true} // Передаем новый пропс для основного пользователя
             />
          </div>
+         <p className={styles.line}></p>
          {loading && <p>Loading...</p>}
          {error && <p className={styles.error}>{error}</p>}
          {similarProfiles.length > 0 && (
@@ -104,7 +105,6 @@ const SimilarProfilesPage: React.FC = () => {
                      onUserSelect={() => { }}
                      onClear={() => { }}
                      url=""
-                     isMainUser={true} // Похожие профили не должны иметь кнопку "Clear"
                   />
                ))}
                <button

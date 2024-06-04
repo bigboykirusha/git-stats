@@ -2,9 +2,32 @@
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
+  overflow: hidden;
+  max-width: 800px;
+
+  select {
+    padding: 10px;
+    font-size: 16px;
+    flex: 1; /* Занимать доступное пространство */
+    border: 2px solid #282c34; /* Добавляем границу */
+    background-color: #fff; /* Цвет фона */
+    color: #282c34; /* Цвет текста */
+    outline: none; /* Удаляем обводку */
+    cursor: pointer; /* Изменяем курсор */
+    transition: border-color 0.3s, background-color 0.3s; /* Добавляем анимацию перехода */
+  }
+
+  select:focus {
+    border-color: #61dafb; /* Изменяем цвет границы при фокусировке */
+  }
 }
 
-select {
-  padding: 10px;
-  font-size: 16px;
+@media (max-width: 768px) {
+  .filterPanel {
+    flex-direction: column;
+
+    select {
+      margin-bottom: 10px; /* Добавляем отступ между селектами */
+    }
+  }
 }
