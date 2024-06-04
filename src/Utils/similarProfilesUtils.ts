@@ -8,25 +8,20 @@ export const findSimilarProfiles = async (user: User, page: number): Promise<Use
       const { location, repositories } = await extractUserInformation(user);
       console.log('Информация о пользователе успешно извлечена');
 
-      // Определяем среднее количество репозиториев пользователя
-      const averageRepos = repositories.length; // Примерное среднее значение
+      const averageRepos = repositories.length; 
       console.log('Среднее количество репозиториев:', averageRepos);
 
-      // Вычисляем диапазон значений для количества репозиториев
-      const minRepos = Math.max(1, Math.round(averageRepos - 10)); // Примерно среднее значение - 5
-      const maxRepos = Math.round(averageRepos + 10); // Примерно среднее значение + 5
+      const minRepos = Math.max(1, Math.round(averageRepos - 40)); 
+      const maxRepos = Math.round(averageRepos + 40); 
       console.log('Диапазон количества репозиториев:', minRepos, '-', maxRepos);
 
-      // Определяем среднее количество фолловеров пользователя
       const averageFollowers = user.followers;
       console.log('Среднее количество фолловеров:', averageFollowers);
 
-      // Вычисляем диапазон значений для количества фолловеров
-      const minFollowers = Math.max(0, Math.round(averageFollowers - 10)); // Примерно среднее значение - 10
-      const maxFollowers = Math.round(averageFollowers + 10); // Примерно среднее значение + 10
+      const minFollowers = Math.max(0, Math.round(averageFollowers - 50)); 
+      const maxFollowers = Math.round(averageFollowers + 50); 
       console.log('Диапазон количества фолловеров:', minFollowers, '-', maxFollowers);
 
-      // Получаем пользователей по местоположению, языку и приблизительным значениям количества репозиториев и фолловеров
       console.log('Начинаем поиск пользователей');
 
       if (user.language === 'TypeScript' || user.language === 'JavaScript') {

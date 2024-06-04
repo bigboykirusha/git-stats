@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaMapMarkerAlt, FaUserFriends, FaUserPlus, FaCodeBranch, FaLink, FaStar, FaUsers, FaBuilding } from 'react-icons/fa';
-import { fetchUserDetails, fetchUserRepos, fetchRepositoryContributors } from '../../services/githubApi';
+import { fetchUserDetails, fetchUserRepositories, fetchRepositoryContributors } from '../../services/githubApi';
 import { User, Repository } from '../../types';
 import styles from './UserProfile.module.scss';
 
@@ -23,7 +23,7 @@ const UserProfile: React.FC = () => {
 
       const fetchRepos = async () => {
          if (userId) {
-            const userRepos = await fetchUserRepos(userId);
+            const userRepos = await fetchUserRepositories(userId);
             const sortedByStars = [...userRepos]
                .sort((a, b) => b.stargazers_count - a.stargazers_count)
                .slice(0, 10);
@@ -63,7 +63,7 @@ const UserProfile: React.FC = () => {
          <h2>{userDetails.login}</h2>
          <p><FaUserPlus className={styles.icon} /> {userDetails.name}</p>
          {userDetails.company && <p><FaBuilding className={styles.icon} /> {userDetails.company}</p>}
-         <p><FaMapMarkerAlt className={styles.icon} /> {userDetails.location}</p>
+         {userDetails.company && <p><FaMapMarkerAlt className={styles.icon} /> {userDetails.location}</p>}
          <p><FaUserFriends className={styles.icon} /> Followers: {userDetails.followers}</p>
          <p><FaUserFriends className={styles.icon} /> Following: {userDetails.following}</p>
          <p><FaCodeBranch className={styles.icon} /> Public Repositories: {userDetails.public_repos}</p>

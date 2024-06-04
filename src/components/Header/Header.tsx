@@ -34,7 +34,7 @@ const Header: React.FC = () => {
       <header className={`${styles.header} ${isMenuActive ? styles.active : ""}`}>
          <Link to="/" onClick={() => { scrollToTop(); closeMenu(); }}>
             <div className={styles.header__logo}>
-               <h1>Git Stat</h1>
+               <h1>Git Stats</h1>
             </div>
          </Link>
          <div className={styles.header__navbar}>

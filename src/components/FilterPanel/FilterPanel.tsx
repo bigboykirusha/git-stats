@@ -45,7 +45,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ onFilterChange, filters }) =>
             <option value="USA">USA</option>
             <option value="China">China</option>
             <option value="India">India</option>
-            <option value="Brazil">Brazil</option>
+            <option value="Belarus">Belarus</option>
             <option value="Russia">Russia</option>
             <option value="Japan">Japan</option>
             <option value="Ukraine">Ukraine</option>
@@ -54,6 +54,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ onFilterChange, filters }) =>
             <option value="France">France</option>
          </select>
          <select value={language} onChange={handleLanguageChange}>
+            <option value="all">All Languages</option>
             <option value="JavaScript">JavaScript</option>
             <option value="Python">Python</option>
             <option value="Java">Java</option>

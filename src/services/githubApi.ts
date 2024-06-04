@@ -80,14 +80,14 @@ export const fetchUsersSecond = async (query: string, sort: string, page: number
             repositories: item.public_repos,
             followers: item.followers,
             updated_at: item.updated_at,
-            ...userDetails, // Добавляем дополнительную информацию о пользователе
+            ...userDetails,
          };
       }));
 
       const ago = dayjs().subtract(6, 'month');
 
       return users
-         .filter((user: any) => dayjs(user.updated_at).isAfter(ago)); // Исключаем пользователей, неактивных более 6 месяцев
+         .filter((user: any) => dayjs(user.updated_at).isAfter(ago));
    } catch (error) {
       console.error('Ошибка при получении пользователей с GitHub API:', error);
       return [];
@@ -106,7 +106,6 @@ export const fetchUsersByLocation = async (
    const queries = [];
 
    if (!location) {
-      // Если локация не указана, ищем по всему миру
       queries.push(fetchUsersSecond(`language:${language} repos:${minRepos}..${maxRepos} followers:${minFollowers}..${maxFollowers}`, 'asc', page));
    } else {
       const locationParts = location.split(',').map(part => part.trim());
@@ -150,16 +149,6 @@ export const extractUserInformation = async (user: User): Promise<{ location: st
    } catch (error) {
       console.error('Ошибка при получении информации о пользователе:', error);
       throw error;
-   }
-};
-
-export const fetchUserRepos = async (username: string): Promise<any[]> => {
-   try {
-      const response = await axiosInstance.get(`/users/${username}/repos`);
-      return response.data;
-   } catch (error) {
-      console.error('Ошибка при получении репозиториев пользователя с GitHub API:', error);
-      return [];
    }
 };
 

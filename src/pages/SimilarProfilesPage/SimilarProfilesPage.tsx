@@ -13,6 +13,7 @@ const SimilarProfilesPage: React.FC = () => {
    const [error, setError] = useState<string | null>(null);
    const [currentPage, setCurrentPage] = useState(1);
    const [allUsersLoaded, setAllUsersLoaded] = useState<boolean>(false);
+   const [showInstructions, setShowInstructions] = useState(true);
 
    useEffect(() => {
       if (user) {
@@ -69,6 +70,7 @@ const SimilarProfilesPage: React.FC = () => {
          setSimilarProfiles((prevProfiles) => [...prevProfiles, ...newProfiles]);
          setCurrentPage((prevPage) => prevPage + 1);
          setLoading(false);
+         setShowInstructions(false);
       } catch (err) {
          setError('Ошибка при загрузке профилей. Пожалуйста, попробуйте снова.');
          setLoading(false);
@@ -80,6 +82,7 @@ const SimilarProfilesPage: React.FC = () => {
       setUrl('');
       setSimilarProfiles([]);
       setCurrentPage(1);
+      setShowInstructions(true);
    };
 
    return (
@@ -90,12 +93,21 @@ const SimilarProfilesPage: React.FC = () => {
                onUserSelect={handleUserSelect}
                onClear={handleClear}
                url={url}
-               isMainUser={true} // Передаем новый пропс для основного пользователя
+               isMainUser={true}
             />
          </div>
          <p className={styles.line}></p>
          {loading && <p>Loading...</p>}
          {error && <p className={styles.error}>{error}</p>}
+         {showInstructions && (
+            <div className={styles.instructions}>
+               <h2>How to Compare Similar Profiles</h2>
+               <p>1. Enter the GitHub profile URL in the search box above.</p>
+               <p>2. Click "Search" to load the profile details.</p>
+               <p>3. View the similar profiles below the main profile card.</p>
+               <p>4. Click "Load More" to see additional similar profiles.</p>
+            </div>
+         )}
          {similarProfiles.length > 0 && (
             <div className={styles.resultsContainer}>
                {similarProfiles.map((profile) => (

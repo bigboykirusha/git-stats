@@ -13,6 +13,7 @@ const ProfileComparisonPage: React.FC = () => {
    const [showResults, setShowResults] = useState(false);
    const [url1, setUrl1] = useState('');
    const [url2, setUrl2] = useState('');
+   const [showInstructions, setShowInstructions] = useState(true);
 
    useEffect(() => {
       if (user1 && user2 && showResults) {
@@ -25,6 +26,11 @@ const ProfileComparisonPage: React.FC = () => {
       if (comparisonResult.winner === user) return styles.winnerCard;
       if (comparisonResult.loser === user) return styles.loserCard;
       return '';
+   };
+
+   const handleCompare = () => {
+      setShowInstructions(false);
+      compareUsers(user1!, user2!, setComparisonResult, setShowResults);
    };
 
    return (
@@ -48,7 +54,15 @@ const ProfileComparisonPage: React.FC = () => {
             />
          </div>
          {user1 && user2 && (
-            <button onClick={() => compareUsers(user1, user2, setComparisonResult, setShowResults)} className={styles.compareButton}>Compare</button>
+            <button onClick={handleCompare} className={styles.compareButton}>Compare</button>
+         )}
+         {showInstructions && (
+            <div className={styles.instructions}>
+               <h2>How to Compare Profiles</h2>
+               <p>1. Enter the URL of the first GitHub profile.</p>
+               <p>2. Enter the URL of the second GitHub profile.</p>
+               <p>3. Click the "Compare" button to see the comparison results.</p>
+            </div>
          )}
          {showResults && (
             <div className={styles.comparisonResults}>
